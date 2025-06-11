@@ -363,6 +363,96 @@
             color: black;
             box-shadow: 0 0 20px var(--neon-yellow);
         }
+
+        /* Nouveau sélecteur de fond d'écran */
+        .bg-selector {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            transform: translateX(-80%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .bg-selector.active {
+            transform: translateX(0);
+        }
+
+        .bg-toggle {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 42, 109, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--neon-yellow);
+            font-size: 20px;
+            cursor: pointer;
+            border: 1px solid var(--neon-yellow);
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .bg-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--neon-yellow);
+        }
+
+        .bg-options {
+            background: rgba(13, 12, 29, 0.9);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            padding: 15px;
+            width: 250px;
+            backdrop-filter: blur(5px);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease;
+            position: absolute;
+            left: 60px;
+            top: 0;
+        }
+
+        .bg-selector.active .bg-options {
+            transform: scaleY(1);
+        }
+
+        .bg-option {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .bg-option:hover {
+            background: rgba(5, 217, 232, 0.2);
+            transform: translateX(5px);
+        }
+
+        .bg-option i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .bg-option.active {
+            background: rgba(5, 217, 232, 0.4);
+            border-left: 3px solid var(--neon-blue);
+        }
+
+        .bg-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
@@ -430,6 +520,31 @@
                 <i class="fas fa-envelope"></i>
                 CONTACT ME
             </a>
+
+            <!-- Sélecteur de fond d'écran -->
+            <div class="bg-selector" id="bgSelector">
+                <button class="bg-toggle" id="bgToggle">
+                    <i class="fas fa-image"></i>
+                </button>
+                <div class="bg-options" id="bgOptions">
+                    <h4 class="bg-title">SELECT BACKGROUND</h4>
+                    <div class="bg-option active" data-bg="Backround 1" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/foggy_day.mp4">
+                        <i class="fas fa-cloud"></i> Backround 1
+                    </div>
+                    <div class="bg-option" data-bg="cyber_city" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/cyber_city.mp4">
+                        <i class="fas fa-city"></i> Backround 2
+                    </div>
+                    <div class="bg-option" data-bg="matrix_rain" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/matrix_rain.mp4">
+                        <i class="fas fa-keyboard"></i> Backround 3
+                    </div>
+                    <div class="bg-option" data-bg="space_loop" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/space_loop.mp4">
+                        <i class="fas fa-meteor"></i> Backround 4
+                    </div>
+                    <div class="bg-option" data-bg="neon_tunnel" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/neon_tunnel.mp4">
+                        <i class="fas fa-road"></i> Backround 5
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="sound-control" id="soundControl">
@@ -549,9 +664,23 @@
         const toggleAbout = document.getElementById('toggleAbout');
         const aboutSection = document.getElementById('aboutSection');
         const emailLink = document.getElementById('emailLink');
+        const bgSelector = document.getElementById('bgSelector');
+        const bgToggle = document.getElementById('bgToggle');
+        const bgOptions = document.getElementById('bgOptions');
+        const bgOptionElements = document.querySelectorAll('.bg-option');
         
         let isSoundOn = false;
         let isAboutVisible = true;
+        let isBgSelectorActive = false;
+        
+        // URLs des backgrounds (à remplacer par vos propres URLs)
+        const backgrounds = {
+            foggy_day: 'https://cdn.discordapp.com/attachments/1037831027067998300/1382188701148250142/AMV_4K_1.mp4?ex=684a3f0a&is=6848ed8a&hm=fc53e7f3d5fd223e8659d023103778e7c4156d1a4b3ce66c19fd5c1e0549ee01&',
+            cyber_city: 'https://cdn.discordapp.com/attachments/1037831027067998300/1382188738679144501/EDIT4K.mp4?ex=684a3f13&is=6848ed93&hm=297d7ea94f20b22773d083bc502031bfc7d69d6eb37b94f38ffa21c5bd225929&',
+            matrix_rain: 'https://cdn.discordapp.com/attachments/1037831027067998300/1382188740205609044/AMV_4K_Free_Clips_.mp4?ex=684a3f13&is=6848ed93&hm=c398ab373a4f5fcc40f6c7fb341646233d6f300f181313a08f80307f87b9c0bd&',
+            space_loop: 'https://cdn.discordapp.com/attachments/1037831027067998300/1382188738008059935/EDIT4k_1.mp4?ex=684a3f12&is=6848ed92&hm=4f1c41eae297fa1fc13328614030bbd683c3a9dff306d3c9b9e00736250c8194&',
+            neon_tunnel: 'https://cdn.discordapp.com/attachments/1037831027067998300/1382188741136748636/EDIT4K.mp4?ex=684a3f13&is=6848ed93&hm=a4bec6603c4328cbdc272eadd99addbe3ac7c1055e739eefe4ef8d9d820d4b4e&'
+        };
         
         enterButton.addEventListener('click', () => {
             // Masquer l'écran d'intro
@@ -583,6 +712,38 @@
             isAboutVisible = !isAboutVisible;
             aboutSection.style.transform = isAboutVisible ? 'translateX(0)' : 'translateX(-150%)';
             toggleAbout.innerHTML = isAboutVisible ? '<i class="fas fa-user-secret"></i>' : '<i class="fas fa-chevron-right"></i>';
+        });
+        
+        // Toggle le sélecteur de fond
+        bgToggle.addEventListener('click', () => {
+            isBgSelectorActive = !isBgSelectorActive;
+            bgSelector.classList.toggle('active', isBgSelectorActive);
+        });
+        
+        // Changer le fond d'écran
+        bgOptionElements.forEach(option => {
+            option.addEventListener('click', function() {
+                const bgName = this.getAttribute('data-bg');
+                const soundUrl = this.getAttribute('data-sound');
+                
+                // Mettre à jour l'option active
+                bgOptionElements.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Changer la vidéo de fond
+                videoBg.src = backgrounds[bgName];
+                videoBg.load();
+                videoBg.play().catch(e => console.log("Autoplay prevented"));
+                
+                // Si le son est activé, garder le son activé
+                if (isSoundOn) {
+                    videoBg.muted = false;
+                }
+                
+                // Fermer le sélecteur après sélection
+                isBgSelectorActive = false;
+                bgSelector.classList.remove('active');
+            });
         });
     </script>
 </body>
