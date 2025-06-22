@@ -3,747 +3,593 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEG4NOX | ELITE GAMER & DEVELOPER</title>
+    <title>NEGAN SHOP - E-commerce Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Nouvelles polices professionnelles */
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
-        
         :root {
-            --neon-red: #ff2a6d;
-            --neon-blue: #05d9e8;
-            --neon-yellow: #f9f002;
-            --dark: #0d0c1d;
+            --primary: #000000;
+            --secondary: #ff0000;
+            --text: #ffffff;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: url('https://cur.cursors-4u.net/games/gam-4/gam361.cur'), auto !important;
+            font-family: 'Arial', sans-serif;
         }
         
         body {
-            overflow: hidden;
-            height: 100vh;
-            font-family: 'Montserrat', sans-serif;
-            background: #000;
+            background-color: #111;
+            color: var(--text);
+            overflow-x: hidden;
         }
         
-        /* Écran d'Introduction */
-        .intro-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
+        /* Animation d'entrée */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary);
+            padding: 20px 5%;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            color: white;
-        }
-        
-        .intro-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 30px;
-            text-align: center;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 10px var(--neon-blue);
-        }
-        
-        .enter-button {
-            padding: 15px 40px;
-            background: transparent;
-            border: 2px solid var(--neon-blue);
-            color: var(--neon-blue);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .enter-button:hover {
-            background: var(--neon-blue);
-            color: black;
-            box-shadow: 0 0 20px var(--neon-blue);
-        }
-        
-        /* Contenu Principal */
-        .main-content {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s ease;
-        }
-        
-        .main-content.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        
-        #video-bg {
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -3;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
         }
         
-        #video-bg.active {
-            opacity: 1;
-        }
-        
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-        
-        #particles-js.active {
-            opacity: 1;
-        }
-        
-        .profile-container {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-        }
-        
-        .name-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            color: var(--neon-red);
-            text-shadow: 0 0 10px var(--neon-red);
-            margin-bottom: 15px;
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
             letter-spacing: 3px;
-            text-transform: uppercase;
+            animation: fadeIn 1s ease-out;
         }
         
-        .title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--neon-blue);
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        
-        .social-container {
-            display: flex;
-            gap: 25px;
-            margin-top: 50px;
-        }
-        
-        .social-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 30px;
+        .logo span {
             color: white;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
         }
         
-        .social-icon::before {
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        nav ul li a::after {
             content: '';
             position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
             width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            transform: scale(0);
-            transition: all 0.3s ease;
         }
         
-        .social-icon:hover::before {
-            transform: scale(1);
-        }
-        
-        .social-icon i {
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-        
-        .social-icon:hover i {
-            transform: scale(1.2);
-        }
-        
-        .discord {
-            border-color: #5865F2;
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
-        }
-        
-        .youtube {
-            border-color: #FF0000;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-        }
-        
-        .instagram {
-            border-color: #E1306C;
-            box-shadow: 0 0 15px rgba(225, 48, 108, 0.5);
-        }
-        
-        .tiktok {
-            border-color: #FE2C55;
-            box-shadow: 0 0 15px rgba(254, 44, 85, 0.5);
-        }
-        
-        .sound-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: rgba(5, 217, 232, 0.2);
-            border-radius: 50%;
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: var(--neon-blue);
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 100;
-            border: 1px solid var(--neon-blue);
-            transition: all 0.3s ease;
+            text-align: center;
+            padding: 0 20px;
         }
         
-        .sound-control:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px var(--neon-blue);
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: fadeIn 1s ease-out 0.2s both;
         }
         
-        /* Animation curseur katana */
-        a, button, .social-icon, .sound-control {
-            cursor: url('https://cur.cursors-4u.net/games/gam-4/gam362.cur'), pointer !important;
-        }
-        
-        /* Nouvelle section About Me */
-        .about-section {
-            position: absolute;
-            left: 30px;
-            bottom: 30px;
-            width: 400px;
-            background: rgba(13, 12, 29, 0.7);
-            border: 1px solid var(--neon-blue);
-            border-radius: 10px;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-            transform: translateX(-150%);
-            transition: transform 0.5s ease;
-            z-index: 10;
-        }
-        
-        .main-content.active .about-section {
-            transform: translateX(0);
-            transition-delay: 0.5s;
-        }
-        
-        .about-title {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-red);
-            margin-bottom: 15px;
-            text-shadow: 0 0 5px var(--neon-red);
-            font-size: 1.5rem;
-        }
-        
-        .about-content {
-            color: white;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-        
-        .skills {
-            margin-top: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .skill-tag {
-            background: rgba(5, 217, 232, 0.2);
-            color: var(--neon-blue);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            border: 1px solid var(--neon-blue);
-        }
-        
-        /* Bouton toggle pour la section about */
-        .toggle-about {
-            position: fixed;
-            left: 20px;
-            bottom: 20px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 42, 109, 0.2);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--neon-red);
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 100;
-            border: 1px solid var(--neon-red);
-            transition: all 0.3s ease;
-        }
-        
-        .toggle-about:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px var(--neon-red);
-        }
-        
-        /* Nouveau style pour l'email */
-        .email-link {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--neon-yellow);
-            color: var(--neon-yellow);
-            padding: 15px 25px;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            text-decoration: none;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            transform: translateX(150%);
-            opacity: 0;
-            backdrop-filter: blur(5px);
-            z-index: 10;
-        }
-        
-        .main-content.active .email-link {
-            transform: translateX(0);
-            opacity: 1;
-            transition-delay: 0.7s;
-        }
-        
-        .email-link i {
+        .hero p {
             font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            animation: fadeIn 1s ease-out 0.4s both;
         }
         
-        .email-link:hover {
-            background: var(--neon-yellow);
-            color: black;
-            box-shadow: 0 0 20px var(--neon-yellow);
-        }
-
-        /* Nouveau sélecteur de fond d'écran */
-        .bg-selector {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            transform: translateX(-80%);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-
-        .bg-selector.active {
-            transform: translateX(0);
-        }
-
-        .bg-toggle {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 42, 109, 0.2);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--neon-yellow);
-            font-size: 20px;
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
-            border: 1px solid var(--neon-yellow);
             transition: all 0.3s ease;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+        
+        .btn:hover {
+            background: #cc0000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+        }
+        
+        /* Produits */
+        .products {
+            padding: 80px 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--secondary);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
+        }
+        
+        .product-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
             margin-bottom: 10px;
         }
-
-        .bg-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px var(--neon-yellow);
+        
+        .product-price {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
-
-        .bg-options {
-            background: rgba(13, 12, 29, 0.9);
-            border: 1px solid var(--neon-blue);
-            border-radius: 10px;
-            padding: 15px;
-            width: 250px;
-            backdrop-filter: blur(5px);
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 0.3s ease;
-            position: absolute;
-            left: 60px;
-            top: 0;
-        }
-
-        .bg-selector.active .bg-options {
-            transform: scaleY(1);
-        }
-
-        .bg-option {
-            display: flex;
-            align-items: center;
-            padding: 8px 10px;
-            margin: 5px 0;
-            border-radius: 5px;
+        
+        .buy-btn {
+            background: var(--primary);
             color: white;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
-
-        .bg-option:hover {
-            background: rgba(5, 217, 232, 0.2);
-            transform: translateX(5px);
+        
+        .buy-btn:hover {
+            background: var(--secondary);
         }
-
-        .bg-option i {
-            margin-right: 10px;
-            width: 20px;
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            padding: 50px 5% 20px;
             text-align: center;
         }
-
-        .bg-option.active {
-            background: rgba(5, 217, 232, 0.4);
-            border-left: 3px solid var(--neon-blue);
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
         }
-
-        .bg-title {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-blue);
-            margin-bottom: 10px;
-            font-size: 1rem;
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-icons {
+            margin-bottom: 30px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal de commande */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: #222;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            animation: fadeIn 0.5s ease-out;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--secondary);
+        }
+        
+        .modal h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+        
+        .submit-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: #cc0000;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Écran d'Introduction -->
-    <div class="intro-screen" id="introScreen">
-        <h1 class="intro-title">NEG4NOX ZONE</h1>
-        <button class="enter-button" id="enterButton">ENTER</button>
+    <header>
+        <div class="logo">NEGAN <span>SHOP</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#products">Produits</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="lang-switch">عربي</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero" id="home">
+        <h1>NEGAN SHOP</h1>
+        <p>Découvrez notre collection exclusive avec des designs uniques et des matériaux de haute qualité.</p>
+        <a href="#products" class="btn">Voir les produits</a>
+    </section>
+    
+    <section class="products" id="products">
+        <h2 class="section-title">Nos Produits</h2>
+        <div class="product-grid">
+            <!-- Produit 1 -->
+            <div class="product-card">
+                <img src="product1.jpg" alt="Produit 1" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Nom du Produit 1</h3>
+                    <p class="product-price">299 MAD</p>
+                    <button class="buy-btn" onclick="openOrderModal('Nom du Produit 1', 299)">Acheter maintenant</button>
+                </div>
+            </div>
+            
+            <!-- Produit 2 -->
+            <div class="product-card">
+                <img src="product2.jpg" alt="Produit 2" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Nom du Produit 2</h3>
+                    <p class="product-price">399 MAD</p>
+                    <button class="buy-btn" onclick="openOrderModal('Nom du Produit 2', 399)">Acheter maintenant</button>
+                </div>
+            </div>
+            
+            <!-- Produit 3 -->
+            <div class="product-card">
+                <img src="product3.jpg" alt="Produit 3" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Nom du Produit 3</h3>
+                    <p class="product-price">499 MAD</p>
+                    <button class="buy-btn" onclick="openOrderModal('Nom du Produit 3', 499)">Acheter maintenant</button>
+                </div>
+            </div>
+            
+            <!-- Produit 4 -->
+            <div class="product-card">
+                <img src="product4.jpg" alt="Produit 4" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Nom du Produit 4</h3>
+                    <p class="product-price">599 MAD</p>
+                    <button class="buy-btn" onclick="openOrderModal('Nom du Produit 4', 599)">Acheter maintenant</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modal de commande -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Passer votre commande</h2>
+            <form id="orderForm">
+                <input type="hidden" id="productName">
+                <input type="hidden" id="productPrice">
+                
+                <div class="form-group">
+                    <label for="fullName">Nom complet</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Numéro de téléphone</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Adresse complète</label>
+                    <input type="text" id="address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">Ville</label>
+                    <input type="text" id="city" value="Safi" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">Quantité</label>
+                    <select id="quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn">Confirmer la commande</button>
+            </form>
+        </div>
     </div>
     
-    <!-- Contenu Principal -->
-    <div class="main-content" id="mainContent">
-        <video autoplay muted loop id="video-bg">
-            <source src="https://cdn.discordapp.com/attachments/1380698301158002808/1383305428829470720/EDIT4K.mp4?ex=684e4f12&is=684cfd92&hm=2366e684a9018cd600883e921dc8b713b7ea39eecf20f1e106a87e24b29b0a14&">
-        </video>
-        
-        <div id="particles-js"></div>
-        
-        <div class="profile-container">
-            <div class="name-title">
-                <h1 class="name">NEG4NOX</h1>
-                <p class="title">Elite Gamer & Developer</p>
-            </div>
-            
-            <div class="social-container">
-                <a href="https://discord.gg/ZGkgR3je" class="social-icon discord" target="_blank">
-                    <i class="fab fa-discord"></i>
-                </a>
-                <a href="https://www.youtube.com/@lm3tob" class="social-icon youtube" target="_blank">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="https://www.instagram.com/tweet_ilaf/?next=%2F" class="social-icon instagram" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.tiktok.com/@neganox0" class="social-icon tiktok" target="_blank">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-            </div>
-            
-            <!-- Nouvelle section About Me -->
-            <div class="about-section" id="aboutSection">
-                <h3 class="about-title">ABOUT ME</h3>
-                <div class="about-content">
-                    <p>Passionate gamer and skilled developer specializing in game cheats and hacks. I create advanced tools to enhance gaming experiences across multiple platforms.</p>
-                    <p>My expertise includes reverse engineering game mechanics and developing undetected cheats for competitive advantages.</p>
-                    
-                    <div class="skills">
-                        <span class="skill-tag">HTML/CSS</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">C#</span>
-                        <span class="skill-tag">Game Hacking</span>
-                        <span class="skill-tag">Reverse Engineering</span>
-                        <span class="skill-tag">Cheat Development</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bouton pour toggle la section about -->
-            <button class="toggle-about" id="toggleAbout">
-                <i class="fas fa-user-secret"></i>
-            </button>
-            
-            <!-- Lien email -->
-            <a href="mailto:ilafspedy@gmail.com" class="email-link" id="emailLink">
-                <i class="fas fa-envelope"></i>
-                CONTACT ME
-            </a>
-
-            <!-- Sélecteur de fond d'écran -->
-            <div class="bg-selector" id="bgSelector">
-                <button class="bg-toggle" id="bgToggle">
-                    <i class="fas fa-image"></i>
-                </button>
-                <div class="bg-options" id="bgOptions">
-                    <h4 class="bg-title">SELECT BACKGROUND</h4>
-                    <div class="bg-option active" data-bg="Backround 1" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/foggy_day.mp4">
-                        <i class="fas fa-cloud"></i> Backround 1
-                    </div>
-                    <div class="bg-option" data-bg="cyber_city" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/cyber_city.mp4">
-                        <i class="fas fa-city"></i> Backround 2
-                    </div>
-                    <div class="bg-option" data-bg="matrix_rain" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/matrix_rain.mp4">
-                        <i class="fas fa-keyboard"></i> Backround 3
-                    </div>
-                    <div class="bg-option" data-bg="space_loop" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/space_loop.mp4">
-                        <i class="fas fa-meteor"></i> Backround 4
-                    </div>
-                    <div class="bg-option" data-bg="neon_tunnel" data-sound="https://cdn.discordapp.com/attachments/1037831027067998300/1382082480202579978/neon_tunnel.mp4">
-                        <i class="fas fa-road"></i> Backround 5
-                    </div>
-                </div>
-            </div>
+    <footer>
+        <div class="footer-links">
+            <a href="#home">Accueil</a>
+            <a href="#products">Produits</a>
+            <a href="#about">À propos</a>
+            <a href="#contact">Contact</a>
+            <a href="#">Mentions légales</a>
         </div>
         
-        <div class="sound-control" id="soundControl">
-            <i class="fas fa-volume-mute"></i>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
         </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        
+        <p class="copyright">© 2023 NEGAN SHOP. Tous droits réservés.</p>
+    </footer>
+    
     <script>
-        // Configuration des particules améliorée (effet tempête/neige)
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 300,  // Plus de particules
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#ffffff"  // Blanc pour ressembler à de la neige
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    }
-                },
-                "opacity": {
-                    "value": 0.8,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                        "speed": 4,
-                        "size_min": 0.3,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": false  // Désactivé pour un effet plus naturel
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 5,  // Vitesse augmentée
-                    "direction": "bottom",  // Direction vers le bas comme de la neige
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "repulse"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 400,
-                        "line_linked": {
-                            "opacity": 1
-                        }
-                    },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 100,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 6  // Plus de particules poussées
-                    },
-                    "remove": {
-                        "particles_nb": 2
-                    }
-                }
-            },
-            "retina_detect": true
-        });
-
-        // Gestion de la transition
-        const enterButton = document.getElementById('enterButton');
-        const introScreen = document.getElementById('introScreen');
-        const mainContent = document.getElementById('mainContent');
-        const videoBg = document.getElementById('video-bg');
-        const particles = document.getElementById('particles-js');
-        const soundControl = document.getElementById('soundControl');
-        const toggleAbout = document.getElementById('toggleAbout');
-        const aboutSection = document.getElementById('aboutSection');
-        const emailLink = document.getElementById('emailLink');
-        const bgSelector = document.getElementById('bgSelector');
-        const bgToggle = document.getElementById('bgToggle');
-        const bgOptions = document.getElementById('bgOptions');
-        const bgOptionElements = document.querySelectorAll('.bg-option');
+        // Fonctions pour le modal
+        function openOrderModal(productName, productPrice) {
+            document.getElementById('productName').value = productName;
+            document.getElementById('productPrice').value = productPrice;
+            document.getElementById('orderModal').style.display = 'flex';
+        }
         
-        let isSoundOn = false;
-        let isAboutVisible = true;
-        let isBgSelectorActive = false;
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
         
-        // URLs des backgrounds (à remplacer par vos propres URLs)
-        const backgrounds = {
-            foggy_day: 'https://cdn.discordapp.com/attachments/1380698301158002808/1383305297828773899/AMV_4K_Free_Clips_.mp4?ex=684e4ef3&is=684cfd73&hm=c475e8bf1e911376a08c9264d05959fba6dca1b50b2973c3b7ee7f330d3a34c7&',
-            cyber_city: 'https://cdn.discordapp.com/attachments/1380698301158002808/1383305251775582289/EDIT4K__PF.mp4?ex=684e4ee8&is=684cfd68&hm=6baea440816d526637e4235e484a6c184803149dbbae2c40a1354b46bb2aa8b1&',
-            matrix_rain: 'https://cdn.discordapp.com/attachments/1380698301158002808/1383305611944656906/AMV_4k.mp4?ex=684e4f3e&is=684cfdbe&hm=1d627fe67d7003264c9afb02aa97f9490c8791323ec4fd58dd2a1a23f0e7f480&',
-            space_loop: 'https://cdn.discordapp.com/attachments/1380698301158002808/1383305462799400981/EDIT4k_1.mp4?ex=684e4f1a&is=684cfd9a&hm=74322894a5862dba0317727e20b9a1b4a8786161b58fcab815109ac1c9ce4d2e&',
-            neon_tunnel: 'https://cdn.discordapp.com/attachments/1037831027067998300/1382188741136748636/EDIT4K.mp4?ex=684e3393&is=684ce213&hm=9504acc9aa803887a5fe05df4243afe5c4030453558a8c71b24ebe0be8d59a78&'
-        };
+        // Fermer le modal quand on clique en dehors
+        window.onclick = function(event) {
+            const modal = document.getElementById('orderModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
         
-        enterButton.addEventListener('click', () => {
-            // Masquer l'écran d'intro
-            introScreen.style.display = 'none';
+        // Envoyer la commande via webhook Discord
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Activer le contenu principal
-            mainContent.classList.add('active');
-            videoBg.classList.add('active');
-            particles.classList.add('active');
+            const productName = document.getElementById('productName').value;
+            const productPrice = document.getElementById('productPrice').value;
+            const fullName = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const quantity = document.getElementById('quantity').value;
             
-            // Activer le son après interaction utilisateur
-            setTimeout(() => {
-                videoBg.muted = false;
-                videoBg.play().catch(e => console.log("Autoplay prevented"));
-                isSoundOn = true;
-                soundControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-            }, 500);
-        });
-        
-        // Contrôle du son
-        soundControl.addEventListener('click', () => {
-            isSoundOn = !isSoundOn;
-            videoBg.muted = !isSoundOn;
-            soundControl.innerHTML = isSoundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
-        });
-        
-        // Toggle la section about
-        toggleAbout.addEventListener('click', () => {
-            isAboutVisible = !isAboutVisible;
-            aboutSection.style.transform = isAboutVisible ? 'translateX(0)' : 'translateX(-150%)';
-            toggleAbout.innerHTML = isAboutVisible ? '<i class="fas fa-user-secret"></i>' : '<i class="fas fa-chevron-right"></i>';
-        });
-        
-        // Toggle le sélecteur de fond
-        bgToggle.addEventListener('click', () => {
-            isBgSelectorActive = !isBgSelectorActive;
-            bgSelector.classList.toggle('active', isBgSelectorActive);
-        });
-        
-        // Changer le fond d'écran
-        bgOptionElements.forEach(option => {
-            option.addEventListener('click', function() {
-                const bgName = this.getAttribute('data-bg');
-                const soundUrl = this.getAttribute('data-sound');
-                
-                // Mettre à jour l'option active
-                bgOptionElements.forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Changer la vidéo de fond
-                videoBg.src = backgrounds[bgName];
-                videoBg.load();
-                videoBg.play().catch(e => console.log("Autoplay prevented"));
-                
-                // Si le son est activé, garder le son activé
-                if (isSoundOn) {
-                    videoBg.muted = false;
+            const totalPrice = parseInt(productPrice) * parseInt(quantity);
+            
+            // Message à envoyer à Discord
+            const message = {
+                content: `**Nouvelle commande sur NEGAN SHOP**\n\n` +
+                         `**Produit:** ${productName}\n` +
+                         `**Prix unitaire:** ${productPrice} MAD\n` +
+                         `**Quantité:** ${quantity}\n` +
+                         `**Total:** ${totalPrice} MAD\n\n` +
+                         `**Informations client:**\n` +
+                         `- Nom complet: ${fullName}\n` +
+                         `- Téléphone: ${phone}\n` +
+                         `- Email: ${email || 'Non fourni'}\n` +
+                         `- Adresse: ${address}, ${city}\n\n` +
+                         `@everyone Nouvelle commande à traiter!`
+            };
+            
+            // URL du webhook Discord - À REMPLACER PAR LE VÔTRE
+            const webhookUrl = 'https://discord.com/api/webhooks/VOTRE_WEBHOOK';
+            
+            // Envoi des données au webhook
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(message),
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Commande passée avec succès! Nous vous contacterons bientôt.');
+                    closeModal();
+                } else {
+                    alert('Erreur lors de l\'envoi de la commande. Veuillez nous contacter directement.');
                 }
-                
-                // Fermer le sélecteur après sélection
-                isBgSelectorActive = false;
-                bgSelector.classList.remove('active');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Erreur réseau. Veuillez nous contacter directement.');
             });
+        });
+        
+        // Changement de langue (basique)
+        document.querySelector('.lang-switch').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Ici vous pouvez implémenter un vrai système de changement de langue
+            alert('Système de langue sera implémenté');
         });
     </script>
 </body>
