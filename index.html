@@ -1,89 +1,271 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NEGANOX Benchmark | Professional Hardware Suite</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              neganox: {
-                black: '#020202',
-                dark: '#0a0a0a',
-                panel: '#111111',
-                red: '#ff0033',
-                redDark: '#cc0029',
-              }
-            },
-            fontFamily: {
-              display: ['Orbitron', 'sans-serif'],
-              body: ['Rajdhani', 'sans-serif'],
-            },
-            animation: {
-              'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'scanline': 'scanline 3s linear infinite',
-              'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
-              'spin-slow': 'spin 15s linear infinite',
-            },
-            keyframes: {
-              scanline: {
-                '0%': { transform: 'translateY(-100%)' },
-                '100%': { transform: 'translateY(100%)' }
-              },
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(30px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' }
-              }
-            }
-          }
-        }
-      }
-    </script>
-    <style>
-      body {
-        background-color: #020202;
-        color: #ffffff;
-        font-family: 'Rajdhani', sans-serif;
-        background-image: 
-          linear-gradient(rgba(255, 0, 51, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 0, 51, 0.03) 1px, transparent 1px);
-        background-size: 40px 40px;
-        min-height: 100vh;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar { width: 6px; }
-      ::-webkit-scrollbar-track { background: #0a0a0a; }
-      ::-webkit-scrollbar-thumb { background: #333; }
-      ::-webkit-scrollbar-thumb:hover { background: #ff0033; }
-      
-      .clip-path-polygon {
-        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-      }
-      .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-      .custom-scrollbar::-webkit-scrollbar-track { background: #111; }
-      .custom-scrollbar::-webkit-scrollbar-thumb { background: #ff0033; }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.469.0"
-  }
+<head>
+<meta charset="UTF-8">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-</script>
-<link rel="stylesheet" href="/index.css">
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Reduced width to make the cards short and compact */
+.overlay-container {
+    position: relative;
+    width: 230px;
+    height: 74px;
+    overflow: hidden;
+}
+
+.social-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(-250px);
+    pointer-events: none;
+    will-change: transform, opacity;
+    border-radius: 14px; /* Rounded Corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.social-card.active {
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 2;
+}
+
+.social-card.enter {
+    animation: enterFromLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.social-card.leave {
+    z-index: 3;
+    animation: exitToRight 0.85s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+@keyframes enterFromLeft {
+    0% { opacity: 0; transform: translateX(-250px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes exitToRight {
+    0% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(250px); }
+}
+
+.icon-box {
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.icon-box img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+}
+
+.tiktok-card .icon-box img,
+.instagram-card .icon-box img {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+}
+
+.text-area {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+}
+
+.username {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Color Schemes */
+.kick-card {
+    background: linear-gradient(90deg, #2bd812 0%, #1ca70b 50%, #126e06 100%);
+}
+
+.tiktok-card {
+    background: linear-gradient(90deg, #08080b 0%, #15151b 55%, #28282d 100%);
+}
+
+.instagram-card {
+    background: linear-gradient(90deg, #833AB4 0%, #C13584 35%, #E1306C 65%, #FD1D1D 100%);
+}
+
+/* Animations Effects */
+.social-card::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 140px;
+    top: -35px;
+    left: -60px;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 70%);
+    animation: movingGlow 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes movingGlow {
+    0% { transform: translateX(0); opacity: 0.5; }
+    50% { transform: translateX(120px); opacity: 1; }
+    100% { transform: translateX(0); opacity: 0.5; }
+}
+
+.social-card::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: skewX(-22deg);
+    animation: shineEffect 4.5s infinite;
+    pointer-events: none;
+}
+
+@keyframes shineEffect {
+    0% { left: -100%; }
+    45% { left: -100%; }
+    75% { left: 130%; }
+    100% { left: 130%; }
+}
+
+.social-card.enter .icon-box {
+    animation: iconPop 0.70s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes iconPop {
+    0% { transform: scale(0.55) rotate(-10deg); opacity: 0; }
+    70% { transform: scale(1.08) rotate(2deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.social-card.enter .text-area {
+    animation: textIn 0.80s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes textIn {
+    0% { opacity: 0; transform: translateX(-15px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+</style>
 </head>
-  <body>
-    <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
+<body>
+
+<div class="overlay-container">
+
+    <!-- 1. KICK -->
+    <div class="social-card kick-card active">
+        <div class="icon-box">
+            <img src="https://i.postimg.cc/yYVQvg12/Icon.jpg" alt="Kick Logo">
+        </div>
+        <div class="text-area">
+            <div class="username">Neganox1</div>
+        </div>
+    </div>
+
+    <!-- 2. TIKTOK -->
+    <div class="social-card tiktok-card">
+        <div class="icon-box">
+            <img src="https://i.postimg.cc/Gmg5BL1J/vecteezy-tiktok-logo-png-tikok-icon-transparent-png-tikok-app-logo-png-18930463.png" alt="TikTok Logo">
+        </div>
+        <div class="text-area">
+            <div class="username">@neganox</div>
+        </div>
+    </div>
+
+    <!-- 3. INSTAGRAM -->
+    <div class="social-card instagram-card">
+        <div class="icon-box">
+            <img src="https://i.postimg.cc/mkSdTRwN/vecteezy-instagram-logo-png-instagram-icon-transparent-18930415.png" alt="Instagram Logo">
+        </div>
+        <div class="text-area">
+            <div class="username">@Neganox</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const cards = Array.from(document.querySelectorAll(".social-card"));
+    let currentIndex = 0;
+    const DISPLAY_TIME = 6000;
+    const ANIMATION_TIME = 850;
+
+    function switchCard() {
+        const currentCard = cards[currentIndex];
+
+        currentCard.classList.remove("active", "enter");
+        currentCard.classList.add("leave");
+
+        currentIndex = (currentIndex + 1) % cards.length;
+        const nextCard = cards[currentIndex];
+
+        nextCard.classList.remove("active", "enter", "leave");
+
+        nextCard.style.opacity = "0";
+        nextCard.style.transform = "translateX(-250px)";
+
+        void nextCard.offsetWidth;
+
+        requestAnimationFrame(function () {
+            nextCard.style.opacity = "";
+            nextCard.style.transform = "";
+            nextCard.classList.add("active", "enter");
+        });
+
+        setTimeout(function () {
+            currentCard.classList.remove("leave");
+            currentCard.style.opacity = "";
+            currentCard.style.transform = "";
+        }, ANIMATION_TIME);
+
+        setTimeout(switchCard, DISPLAY_TIME);
+    }
+
+    setTimeout(switchCard, DISPLAY_TIME);
+});
+</script>
+
 </body>
 </html>
